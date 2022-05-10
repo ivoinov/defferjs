@@ -64,10 +64,11 @@ class FileStorage implements CacheStorageInterface
             if (!\file_exists($cacheFolderPath)) {
                 mkdir($cacheFolderPath, 0777, true);
             }
-            if (!\file_exists($this->directoryList->getRoot() .  $path)) {
+            $originalFilepath = $this->directoryList->getRoot() . '/pub' . $path;
+            if (!\file_exists($originalFilepath)) {
                 return '';
             }
-            $html = file_get_contents($this->directoryList->getRoot() .  $path);
+            $html = file_get_contents($originalFilepath);
             $pathParts = explode('/', $path);
             $count = count($pathParts);
             unset($pathParts[$count - 1]);

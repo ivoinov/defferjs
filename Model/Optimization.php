@@ -215,7 +215,9 @@ class Optimization
                 if (!file_exists($allJsFilepath)) {
                     $allJs = '';
                     foreach ($mergeJsList as $pathToFile) {
-                        $allJs .= file_get_contents($this->directoryList->getRoot() . $pathToFile) . ";\n";
+                        if (!empty($pathToFile)) {
+                            $allJs .= file_get_contents($this->directoryList->getRoot() . $pathToFile) . ";\n";
+                        }
                     }
                     $file = fopen($allJsFilepath, 'w');
                     fwrite($file, $allJs);
@@ -499,7 +501,7 @@ if(!w3_html.classList.contains("w3_js")){
         var page_is_scrolled = false;
 
 		setTimeout(function(){load_googlefont();},google_fonts_delay_load);
-	setTimeout(function(){load_intJS_main(); console.log("xyz1");},internal_js_delay_load);
+	setTimeout(function(){load_intJS_main();},internal_js_delay_load);
 			setTimeout(function(){load_extJS();},js_delay_load);
 
         window.addEventListener("DOMContentLoaded", function(event){
